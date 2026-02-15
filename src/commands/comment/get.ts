@@ -1,0 +1,30 @@
+import { Command } from "@cliffy/command";
+import { getClient } from "../../client.ts";
+import { pick, printJson } from "../../output.ts";
+import { handleErrors } from "../../errors.ts";
+
+const COMMENT_FIELDS = [
+  "id",
+  "body",
+  "createdAt",
+  "updatedAt",
+  "url",
+];
+
+export const getCommand = new Command()
+  .description("Get a comment by ID.")
+  .arguments("<id:string>")
+  .action(
+    handleErrors(async (_options: void, id: string) => {
+      const client = getClient();
+      const comment = await client.comment({ id });
+      const user = await comment.user;
+
+      const data = {
+        ...pick(comment, COMMENT_FIELDS),
+        user: user ? pick(user, ["id", "name", "email"]) : null,
+      };
+
+      printJson(data);
+    }),
+  );
