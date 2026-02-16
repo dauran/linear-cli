@@ -18,7 +18,7 @@ export const createCommand = new Command()
   })
   .option(
     "--type <type:string>",
-    "Relation type (blocks, duplicate, related).",
+    "Relation type (blocks, duplicate, related, similar).",
     { required: true },
   )
   .action(

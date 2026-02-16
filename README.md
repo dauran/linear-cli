@@ -302,12 +302,22 @@ deno task dev project-update create --project-id <project-id> --body "Sprint wen
 | `issue-relation update` | Update a relation     | `<id>`    | `--type <type>` _(required)_                                                                              |
 | `issue-relation delete` | Delete a relation     | `<id>`    | —                                                                                                        |
 
-Relation types: `blocks`, `duplicate`, `related`
+Relation types: `blocks`, `duplicate`, `related`, `similar`
 
 **Examples:**
 
 ```bash
-deno task dev issue-relation create --issue-id <id> --related-issue-id <id> --type blocks
+# Issue A blocks Issue B
+deno task dev issue-relation create --issue-id <issue-a-id> --related-issue-id <issue-b-id> --type blocks
+
+# Issue A is blocked by Issue B (reverse the IDs, still use "blocks")
+deno task dev issue-relation create --issue-id <issue-b-id> --related-issue-id <issue-a-id> --type blocks
+
+# Mark Issue B as a duplicate of Issue A
+deno task dev issue-relation create --issue-id <issue-a-id> --related-issue-id <issue-b-id> --type duplicate
+
+# Link two related issues
+deno task dev issue-relation create --issue-id <issue-a-id> --related-issue-id <issue-b-id> --type related
 ```
 
 ---
