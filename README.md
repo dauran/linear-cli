@@ -66,7 +66,7 @@ deno task dev user list --first 20
 | `issue list`    | List issues         | —          | `--first <count>`, `--team <teamId>`, `--assignee <userId>`, `--state <stateId>`                                                                                                        |
 | `issue get`     | Get an issue by ID  | `<id>`     | —                                                                                                                                                                                       |
 | `issue create`  | Create a new issue  | —          | `--title <title>` _(required)_, `--team-id <teamId>` _(required)_, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--label-ids <ids...>` |
-| `issue update`  | Update an issue     | `<id>`     | `--title <title>`, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`                                                                         |
+| `issue update`  | Update an issue     | `<id>`     | `--title <title>`, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--parent-id <issueId>`                                                |
 | `issue delete`  | Delete an issue     | `<id>`     | —                                                                                                                                                                                       |
 | `issue archive` | Archive an issue    | `<id>`     | —                                                                                                                                                                                       |
 | `issue search`  | Search issues       | `<term>`   | `--first <count>`                                                                                                                                                                       |
@@ -77,6 +77,8 @@ deno task dev user list --first 20
 deno task dev issue list --first 10 --team <team-id>
 deno task dev issue create --title "My issue" --team-id <team-id> --priority 2
 deno task dev issue update <issue-id> --title "New title" --state-id <state-id>
+# Make an issue a sub-issue of another
+deno task dev issue update <issue-id> --parent-id <parent-issue-id>
 deno task dev issue delete <issue-id>
 deno task dev issue archive <issue-id>
 deno task dev issue search "bug" --first 20

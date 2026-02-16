@@ -9,6 +9,7 @@ interface UpdateOptions {
   priority?: number;
   assigneeId?: string;
   stateId?: string;
+  parentId?: string;
 }
 
 export const updateCommand = new Command()
@@ -19,6 +20,7 @@ export const updateCommand = new Command()
   .option("--priority <priority:number>", "New priority (0-4).")
   .option("--assignee-id <assigneeId:string>", "New assignee user ID.")
   .option("--state-id <stateId:string>", "New state ID.")
+  .option("--parent-id <parentId:string>", "Parent issue ID (for sub-issues).")
   .action(
     handleErrors(async (options: UpdateOptions, id: string) => {
       const client = getClient();
@@ -29,6 +31,7 @@ export const updateCommand = new Command()
         priority?: number;
         assigneeId?: string;
         stateId?: string;
+        parentId?: string;
       } = {};
       if (options.title !== undefined) input.title = options.title;
       if (options.description !== undefined) {
@@ -37,6 +40,7 @@ export const updateCommand = new Command()
       if (options.priority !== undefined) input.priority = options.priority;
       if (options.assigneeId) input.assigneeId = options.assigneeId;
       if (options.stateId) input.stateId = options.stateId;
+      if (options.parentId) input.parentId = options.parentId;
 
       const payload = await client.updateIssue(id, input);
       const issue = await payload.issue;
