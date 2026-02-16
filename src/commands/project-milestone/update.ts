@@ -8,6 +8,7 @@ interface UpdateOptions {
   description?: string;
   targetDate?: string;
   sortOrder?: number;
+  projectId?: string;
 }
 
 export const updateCommand = new Command()
@@ -17,6 +18,7 @@ export const updateCommand = new Command()
   .option("--description <description:string>", "New description.")
   .option("--target-date <targetDate:string>", "New target date (ISO format).")
   .option("--sort-order <sortOrder:number>", "New sort order.")
+  .option("--project-id <projectId:string>", "Move to another project.")
   .action(
     handleErrors(async (options: UpdateOptions, id: string) => {
       const client = getClient();
@@ -26,6 +28,7 @@ export const updateCommand = new Command()
         description?: string;
         targetDate?: string;
         sortOrder?: number;
+        projectId?: string;
       } = {};
       if (options.name !== undefined) input.name = options.name;
       if (options.description !== undefined) {
@@ -33,6 +36,7 @@ export const updateCommand = new Command()
       }
       if (options.targetDate) input.targetDate = options.targetDate;
       if (options.sortOrder !== undefined) input.sortOrder = options.sortOrder;
+      if (options.projectId) input.projectId = options.projectId;
 
       const payload = await client.updateProjectMilestone(id, input);
       const milestone = await payload.projectMilestone;

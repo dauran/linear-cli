@@ -7,6 +7,8 @@ interface CreateOptions {
   name: string;
   description?: string;
   color?: string;
+  ownerId?: string;
+  sortOrder?: number;
 }
 
 export const createCommand = new Command()
@@ -14,6 +16,8 @@ export const createCommand = new Command()
   .option("--name <name:string>", "Roadmap name.", { required: true })
   .option("--description <description:string>", "Roadmap description.")
   .option("--color <color:string>", "Roadmap color.")
+  .option("--owner-id <ownerId:string>", "Owner user ID.")
+  .option("--sort-order <sortOrder:number>", "Sort order.")
   .action(
     handleErrors(async (options: CreateOptions) => {
       const client = getClient();
@@ -22,6 +26,8 @@ export const createCommand = new Command()
         name: string;
         description?: string;
         color?: string;
+        ownerId?: string;
+        sortOrder?: number;
       } = {
         name: options.name,
       };
@@ -29,6 +35,8 @@ export const createCommand = new Command()
         input.description = options.description;
       }
       if (options.color !== undefined) input.color = options.color;
+      if (options.ownerId) input.ownerId = options.ownerId;
+      if (options.sortOrder !== undefined) input.sortOrder = options.sortOrder;
 
       const payload = await client.createRoadmap(input);
       const roadmap = await payload.roadmap;

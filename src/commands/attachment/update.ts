@@ -7,6 +7,7 @@ interface UpdateOptions {
   title?: string;
   subtitle?: string;
   url?: string;
+  iconUrl?: string;
 }
 
 export const updateCommand = new Command()
@@ -15,6 +16,7 @@ export const updateCommand = new Command()
   .option("--title <title:string>", "New title.")
   .option("--subtitle <subtitle:string>", "New subtitle.")
   .option("--url <url:string>", "New URL.")
+  .option("--icon-url <iconUrl:string>", "Icon URL.")
   .action(
     handleErrors(async (options: UpdateOptions, id: string) => {
       const client = getClient();
@@ -24,10 +26,16 @@ export const updateCommand = new Command()
       if (options.title !== undefined) input.title = options.title;
       if (options.subtitle !== undefined) input.subtitle = options.subtitle;
       if (options.url !== undefined) input.url = options.url;
+      if (options.iconUrl !== undefined) input.iconUrl = options.iconUrl;
 
       const payload = await client.updateAttachment(
         id,
-        input as { title: string; subtitle?: string; url?: string },
+        input as {
+          title: string;
+          subtitle?: string;
+          url?: string;
+          iconUrl?: string;
+        },
       );
       const attachment = await payload.attachment;
 

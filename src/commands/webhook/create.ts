@@ -9,6 +9,8 @@ interface CreateOptions {
   label?: string;
   teamId?: string;
   allPublicTeams?: boolean;
+  enabled?: boolean;
+  secret?: string;
 }
 
 export const createCommand = new Command()
@@ -20,6 +22,8 @@ export const createCommand = new Command()
   .option("--label <label:string>", "Webhook label.")
   .option("--team-id <teamId:string>", "Team ID.")
   .option("--all-public-teams", "Subscribe to all public teams.")
+  .option("--enabled <enabled:boolean>", "Enable or disable.")
+  .option("--secret <secret:string>", "Signing secret.")
   .action(
     handleErrors(async (options: CreateOptions) => {
       const client = getClient();
@@ -30,6 +34,8 @@ export const createCommand = new Command()
         label?: string;
         teamId?: string;
         allPublicTeams?: boolean;
+        enabled?: boolean;
+        secret?: string;
       } = {
         url: options.url,
         resourceTypes: options.resourceTypes,
@@ -39,6 +45,8 @@ export const createCommand = new Command()
       if (options.allPublicTeams !== undefined) {
         input.allPublicTeams = options.allPublicTeams;
       }
+      if (options.enabled !== undefined) input.enabled = options.enabled;
+      if (options.secret !== undefined) input.secret = options.secret;
 
       const payload = await client.createWebhook(input);
       const webhook = await payload.webhook;

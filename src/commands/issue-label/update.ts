@@ -8,6 +8,7 @@ interface UpdateOptions {
   color?: string;
   description?: string;
   parentId?: string;
+  isGroup?: boolean;
 }
 
 export const updateCommand = new Command()
@@ -17,6 +18,7 @@ export const updateCommand = new Command()
   .option("--color <color:string>", "New color.")
   .option("--description <description:string>", "New description.")
   .option("--parent-id <parentId:string>", "New parent label ID.")
+  .option("--is-group", "Label is a group.")
   .action(
     handleErrors(async (options: UpdateOptions, id: string) => {
       const client = getClient();
@@ -26,6 +28,7 @@ export const updateCommand = new Command()
         color?: string;
         description?: string;
         parentId?: string;
+        isGroup?: boolean;
       } = {};
       if (options.name !== undefined) input.name = options.name;
       if (options.color !== undefined) input.color = options.color;
@@ -33,6 +36,7 @@ export const updateCommand = new Command()
         input.description = options.description;
       }
       if (options.parentId) input.parentId = options.parentId;
+      if (options.isGroup !== undefined) input.isGroup = options.isGroup;
 
       const payload = await client.updateIssueLabel(id, input);
       const label = await payload.issueLabel;

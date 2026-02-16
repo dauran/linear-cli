@@ -8,6 +8,10 @@ interface ListOptions {
   team?: string;
   assignee?: string;
   state?: string;
+  cycle?: string;
+  project?: string;
+  label?: string;
+  priority?: number;
 }
 
 const ISSUE_FIELDS = [
@@ -26,6 +30,10 @@ export const listCommand = new Command()
   .option("--team <teamId:string>", "Filter by team ID.")
   .option("--assignee <userId:string>", "Filter by assignee ID.")
   .option("--state <stateId:string>", "Filter by state ID.")
+  .option("--cycle <cycleId:string>", "Filter by cycle ID.")
+  .option("--project <projectId:string>", "Filter by project ID.")
+  .option("--label <labelId:string>", "Filter by label ID.")
+  .option("--priority <priority:number>", "Filter by priority (0-4).")
   .action(
     handleErrors(async (options: ListOptions) => {
       const client = getClient();
@@ -36,6 +44,12 @@ export const listCommand = new Command()
         filter.assignee = { id: { eq: options.assignee } };
       }
       if (options.state) filter.state = { id: { eq: options.state } };
+      if (options.cycle) filter.cycle = { id: { eq: options.cycle } };
+      if (options.project) filter.project = { id: { eq: options.project } };
+      if (options.label) filter.labels = { id: { eq: options.label } };
+      if (options.priority !== undefined) {
+        filter.priority = { eq: options.priority };
+      }
 
       const issues = await client.issues({
         first: options.first ?? 50,

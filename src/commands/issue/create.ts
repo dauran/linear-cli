@@ -11,6 +11,15 @@ interface CreateOptions {
   assigneeId?: string;
   stateId?: string;
   labelIds?: string[];
+  cycleId?: string;
+  dueDate?: string;
+  estimate?: number;
+  parentId?: string;
+  projectId?: string;
+  projectMilestoneId?: string;
+  subscriberIds?: string[];
+  sortOrder?: number;
+  prioritySortOrder?: number;
 }
 
 export const createCommand = new Command()
@@ -22,6 +31,21 @@ export const createCommand = new Command()
   .option("--assignee-id <assigneeId:string>", "Assignee user ID.")
   .option("--state-id <stateId:string>", "State ID.")
   .option("--label-ids <labelIds...:string>", "Label IDs.")
+  .option("--cycle-id <cycleId:string>", "Cycle ID.")
+  .option("--due-date <dueDate:string>", "Due date (YYYY-MM-DD).")
+  .option("--estimate <estimate:number>", "Estimate (complexity points).")
+  .option("--parent-id <parentId:string>", "Parent issue ID (for sub-issues).")
+  .option("--project-id <projectId:string>", "Project ID.")
+  .option(
+    "--project-milestone-id <projectMilestoneId:string>",
+    "Project milestone ID.",
+  )
+  .option("--subscriber-ids <subscriberIds...:string>", "Subscriber user IDs.")
+  .option("--sort-order <sortOrder:number>", "Sort order.")
+  .option(
+    "--priority-sort-order <prioritySortOrder:number>",
+    "Priority sort order.",
+  )
   .action(
     handleErrors(async (options: CreateOptions) => {
       const client = getClient();
@@ -34,6 +58,15 @@ export const createCommand = new Command()
         assigneeId?: string;
         stateId?: string;
         labelIds?: string[];
+        cycleId?: string;
+        dueDate?: string;
+        estimate?: number;
+        parentId?: string;
+        projectId?: string;
+        projectMilestoneId?: string;
+        subscriberIds?: string[];
+        sortOrder?: number;
+        prioritySortOrder?: number;
       } = {
         title: options.title,
         teamId: options.teamId,
@@ -45,6 +78,21 @@ export const createCommand = new Command()
       if (options.assigneeId) input.assigneeId = options.assigneeId;
       if (options.stateId) input.stateId = options.stateId;
       if (options.labelIds) input.labelIds = options.labelIds;
+      if (options.cycleId) input.cycleId = options.cycleId;
+      if (options.dueDate !== undefined) input.dueDate = options.dueDate;
+      if (options.estimate !== undefined) input.estimate = options.estimate;
+      if (options.parentId) input.parentId = options.parentId;
+      if (options.projectId) input.projectId = options.projectId;
+      if (options.projectMilestoneId) {
+        input.projectMilestoneId = options.projectMilestoneId;
+      }
+      if (options.subscriberIds) {
+        input.subscriberIds = options.subscriberIds;
+      }
+      if (options.sortOrder !== undefined) input.sortOrder = options.sortOrder;
+      if (options.prioritySortOrder !== undefined) {
+        input.prioritySortOrder = options.prioritySortOrder;
+      }
 
       const payload = await client.createIssue(input);
       const issue = await payload.issue;

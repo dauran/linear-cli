@@ -9,6 +9,8 @@ interface UpdateOptions {
   projectId?: string;
   icon?: string;
   color?: string;
+  issueId?: string;
+  sortOrder?: number;
 }
 
 export const updateCommand = new Command()
@@ -19,6 +21,8 @@ export const updateCommand = new Command()
   .option("--project-id <projectId:string>", "New project ID.")
   .option("--icon <icon:string>", "New icon.")
   .option("--color <color:string>", "New color.")
+  .option("--issue-id <issueId:string>", "Issue ID.")
+  .option("--sort-order <sortOrder:number>", "Sort order.")
   .action(
     handleErrors(async (options: UpdateOptions, id: string) => {
       const client = getClient();
@@ -29,12 +33,16 @@ export const updateCommand = new Command()
         projectId?: string;
         icon?: string;
         color?: string;
+        issueId?: string;
+        sortOrder?: number;
       } = {};
       if (options.title !== undefined) input.title = options.title;
       if (options.content !== undefined) input.content = options.content;
       if (options.projectId) input.projectId = options.projectId;
       if (options.icon !== undefined) input.icon = options.icon;
       if (options.color !== undefined) input.color = options.color;
+      if (options.issueId) input.issueId = options.issueId;
+      if (options.sortOrder !== undefined) input.sortOrder = options.sortOrder;
 
       const payload = await client.updateDocument(id, input);
       const document = await payload.document;

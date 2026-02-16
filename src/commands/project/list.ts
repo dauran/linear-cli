@@ -7,6 +7,7 @@ interface ListOptions {
   first?: number;
   team?: string;
   state?: string;
+  lead?: string;
 }
 
 const PROJECT_FIELDS = [
@@ -25,12 +26,14 @@ export const listCommand = new Command()
   .option("--first <count:number>", "Number of projects to return.")
   .option("--team <teamId:string>", "Filter by team ID.")
   .option("--state <state:string>", "Filter by project state.")
+  .option("--lead <leadId:string>", "Filter by lead user ID.")
   .action(
     handleErrors(async (options: ListOptions) => {
       const client = getClient();
 
       const filter: Record<string, unknown> = {};
       if (options.state) filter.state = { eq: options.state };
+      if (options.lead) filter.lead = { id: { eq: options.lead } };
 
       const args: Record<string, unknown> = {
         first: options.first ?? 50,

@@ -7,6 +7,7 @@ import { handleErrors } from "../../errors.ts";
 interface UpdateOptions {
   body?: string;
   health?: string;
+  isDiffHidden?: boolean;
 }
 
 export const updateCommand = new Command()
@@ -17,6 +18,7 @@ export const updateCommand = new Command()
     "--health <health:string>",
     "New health status (onTrack, atRisk, offTrack).",
   )
+  .option("--is-diff-hidden", "Hide the diff.")
   .action(
     handleErrors(async (options: UpdateOptions, id: string) => {
       const client = getClient();
@@ -26,6 +28,9 @@ export const updateCommand = new Command()
       if (options.body !== undefined) input.body = options.body;
       if (options.health !== undefined) {
         input.health = options.health as ProjectUpdateHealthType;
+      }
+      if (options.isDiffHidden !== undefined) {
+        input.isDiffHidden = options.isDiffHidden;
       }
 
       const payload = await client.updateProjectUpdate(id, input);

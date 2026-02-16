@@ -10,6 +10,10 @@ interface UpdateOptions {
   status?: string;
   color?: string;
   icon?: string;
+  ownerId?: string;
+  targetDate?: string;
+  content?: string;
+  sortOrder?: number;
 }
 
 export const updateCommand = new Command()
@@ -20,6 +24,10 @@ export const updateCommand = new Command()
   .option("--status <status:string>", "New status.")
   .option("--color <color:string>", "New color.")
   .option("--icon <icon:string>", "New icon.")
+  .option("--owner-id <ownerId:string>", "Owner user ID.")
+  .option("--target-date <targetDate:string>", "Target date (YYYY-MM-DD).")
+  .option("--content <content:string>", "Content (markdown).")
+  .option("--sort-order <sortOrder:number>", "Sort order.")
   .action(
     handleErrors(async (options: UpdateOptions, id: string) => {
       const client = getClient();
@@ -35,6 +43,10 @@ export const updateCommand = new Command()
       }
       if (options.color !== undefined) input.color = options.color;
       if (options.icon !== undefined) input.icon = options.icon;
+      if (options.ownerId) input.ownerId = options.ownerId;
+      if (options.targetDate) input.targetDate = options.targetDate;
+      if (options.content !== undefined) input.content = options.content;
+      if (options.sortOrder !== undefined) input.sortOrder = options.sortOrder;
 
       const payload = await client.updateInitiative(id, input);
       const initiative = await payload.initiative;
