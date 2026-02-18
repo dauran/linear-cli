@@ -5,6 +5,7 @@ import { handleErrors } from "../../errors.ts";
 
 const COMMENT_FIELDS = [
   "id",
+  "parentId",
   "body",
   "createdAt",
   "updatedAt",
