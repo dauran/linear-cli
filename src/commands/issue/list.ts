@@ -12,6 +12,7 @@ interface ListOptions {
   project?: string;
   label?: string;
   priority?: number;
+  parent?: string;
 }
 
 const ISSUE_FIELDS = [
@@ -34,6 +35,7 @@ export const listCommand = new Command()
   .option("--project <projectId:string>", "Filter by project ID.")
   .option("--label <labelId:string>", "Filter by label ID.")
   .option("--priority <priority:number>", "Filter by priority (0-4).")
+  .option("--parent <issueId:string>", "Filter by parent issue ID (sub-issues).")
   .action(
     handleErrors(async (options: ListOptions) => {
       const client = getClient();
@@ -50,6 +52,7 @@ export const listCommand = new Command()
       if (options.priority !== undefined) {
         filter.priority = { eq: options.priority };
       }
+      if (options.parent) filter.parent = { id: { eq: options.parent } };
 
       const issues = await client.issues({
         first: options.first ?? 50,
