@@ -93,7 +93,7 @@ deno task dev issue search "bug" --first 20
 | `comment list`   | List comments              | —         | `--issue-id <issueId>`, `--first <count>`                                                                                         |
 | `comment get`    | Get a comment by ID        | `<id>`    | —                                                                                                                                  |
 | `comment create` | Create a comment           | —         | `--issue-id <issueId>` _(required)_, `--body <body>` _(required)_, `--parent-id <commentId>`, `--project-update-id <id>`, `--document-content-id <id>` |
-| `comment update` | Update a comment           | `<id>`    | `--body <body>` _(required)_                                      |
+| `comment update` | Update a comment           | `<id>`    | `--body <body>`, `--resolved`, `--unresolved`                     |
 | `comment delete` | Delete a comment           | `<id>`    | —                                                                 |
 
 **Examples:**
