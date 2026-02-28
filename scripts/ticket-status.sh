@@ -61,6 +61,13 @@ CURRENT_STATE_ID="$(echo "$ISSUE_JSON" | jq -r '.state.id // "unknown"')"
 
 echo "📋 Ticket  : [$TICKET] $ISSUE_TITLE"
 echo "📊 Current status : $CURRENT_STATE (\`$CURRENT_STATE_ID\`)"
+
+if [[ "$CURRENT_STATE_ID" == "$STATUS_ID" ]]; then
+  echo ""
+  echo "✅ Ticket already has the requested status (\`$STATUS_ID\`)."
+  exit 0
+fi
+
 echo "🔄 Changing to status : \`$STATUS_ID\`..."
 
 # ── Status update ─────────────────────────────────────────────────────
