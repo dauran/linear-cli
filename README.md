@@ -379,6 +379,71 @@ deno task dev attachment list --first 20
 deno task dev attachment create --issue-id <issue-id> --url "https://example.com/file.pdf" --title "Design spec"
 ```
 
+---
+
+## Shell scripts
+
+The `scripts/` directory contains convenience scripts that wrap common workflows. These files are **gitignored** to protect API keys.
+
+> **Prerequisites:** source a workspace wrapper first (`linear-work.sh` or `linear-perso.sh`) or have `LINEAR_API_KEY` set, and have the compiled `linear` binary in the current directory.
+
+### `scripts/comments.sh` — List comments on a ticket
+
+```bash
+./scripts/comments.sh <TICKET_NUMBER>
+# ex: ./scripts/comments.sh DAU-42
+```
+
+outputs a hierarchical Markdown view of all comments (author, ID, content, resolved status).
+
+### `scripts/write-comment.sh` — Add a comment to a ticket
+
+```bash
+./scripts/write-comment.sh <TICKET_NUMBER> --comment "comment body"
+# ex: ./scripts/write-comment.sh DAU-42 --comment "LGTM!"
+```
+
+### `scripts/resolve-comment.sh` — Mark a comment as resolved
+
+```bash
+./scripts/resolve-comment.sh --commentId <COMMENT_ID>
+# ex: ./scripts/resolve-comment.sh --commentId 138d65eb-250a-4efa-9141-f7774d874c63
+```
+
+Uses the dedicated `commentResolve` Linear API mutation (not `updateComment`).
+
+### `scripts/project.sh` — Display ticket context
+
+```bash
+source scripts/linear-work.sh   # set API key
+./scripts/project.sh <TICKET_NUMBER>
+# ex: ./scripts/project.sh DAU-42
+```
+
+Outputs user info, team info, available workflow states, and the full ticket details.
+
+### `scripts/block.sh` — Manage blocking relations between tickets
+
+```bash
+# Create: TICKET_A blocks TICKET_B
+./scripts/block.sh <TICKET_A> --blocks <TICKET_B>
+# ex: ./scripts/block.sh DAU-10 --blocks DAU-42
+
+# Create: TICKET_A is blocked by TICKET_B
+./scripts/block.sh <TICKET_A> --blocked-by <TICKET_B>
+# ex: ./scripts/block.sh DAU-42 --blocked-by DAU-10
+
+# Remove: the "TICKET_A blocks TICKET_B" relation
+./scripts/block.sh <TICKET_A> --unblocks <TICKET_B>
+# ex: ./scripts/block.sh DAU-10 --unblocks DAU-42
+
+# Remove: the "TICKET_B blocks TICKET_A" relation
+./scripts/block.sh <TICKET_A> --unblocked-by <TICKET_B>
+# ex: ./scripts/block.sh DAU-42 --unblocked-by DAU-10
+```
+
+The forms `--blocks`/`--blocked-by` and `--unblocks`/`--unblocked-by` are symmetrical — they designate the same relation, formulated from the point of view of each ticket.
+
 ## Building an executable
 
 Deno can compile the project into a **standalone native binary** — no dependencies required on the target machine.
