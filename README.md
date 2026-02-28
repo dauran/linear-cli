@@ -45,10 +45,10 @@ deno task dev team get <team-id>
 
 ### `user` — Manage users
 
-| Subcommand  | Description                                             | Arguments | Options            |
-| ----------- | ------------------------------------------------------- | --------- | ------------------ |
-| `user get`  | Get a user by ID (or `"me"` for the authenticated user) | `<id>`    | —                  |
-| `user list` | List users                                              | —         | `--first <count>`  |
+| Subcommand  | Description                                             | Arguments | Options           |
+| ----------- | ------------------------------------------------------- | --------- | ----------------- |
+| `user get`  | Get a user by ID (or `"me"` for the authenticated user) | `<id>`    | —                 |
+| `user list` | List users                                              | —         | `--first <count>` |
 
 **Examples:**
 
@@ -61,15 +61,15 @@ deno task dev user list --first 20
 
 ### `issue` — Manage issues
 
-| Subcommand      | Description         | Arguments  | Options                                                                                                                                                                                 |
-| --------------- | ------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `issue list`    | List issues         | —          | `--first <count>`, `--team <teamId>`, `--assignee <userId>`, `--state <stateId>`, `--cycle <cycleId>`, `--project <projectId>`, `--label <labelId>`, `--priority <0-4>`, `--parent <issueId>` |
-| `issue get`     | Get an issue by ID  | `<id>`     | —                                                                                                                                                                                       |
-| `issue create`  | Create a new issue  | —          | `--title <title>` _(required)_, `--team-id <teamId>` _(required)_, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--label-ids <ids...>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--parent-id <issueId>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--subscriber-ids <ids...>`, `--sort-order <n>`, `--priority-sort-order <n>` |
-| `issue update`  | Update an issue     | `<id>`     | `--title <title>`, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--parent-id <issueId>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--label-ids <ids...>`, `--added-label-ids <ids...>`, `--removed-label-ids <ids...>`, `--subscriber-ids <ids...>`, `--team-id <teamId>`, `--sort-order <n>`, `--priority-sort-order <n>`, `--snoozed-until-at <datetime>`, `--sub-issue-sort-order <n>` |
-| `issue delete`  | Delete an issue     | `<id>`     | —                                                                                                                                                                                       |
-| `issue archive` | Archive an issue    | `<id>`     | —                                                                                                                                                                                       |
-| `issue search`  | Search issues       | `<term>`   | `--first <count>`                                                                                                                                                                       |
+| Subcommand      | Description        | Arguments | Options                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------------- | ------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `issue list`    | List issues        | —         | `--first <count>`, `--team <teamId>`, `--assignee <userId>`, `--state <stateId>`, `--cycle <cycleId>`, `--project <projectId>`, `--label <labelId>`, `--priority <0-4>`, `--parent <issueId>`                                                                                                                                                                                                                                                                                                                                     |
+| `issue get`     | Get an issue by ID | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `issue create`  | Create a new issue | —         | `--title <title>` _(required)_, `--team-id <teamId>` _(required)_, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--label-ids <ids...>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--parent-id <issueId>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--subscriber-ids <ids...>`, `--sort-order <n>`, `--priority-sort-order <n>`                                                                                                    |
+| `issue update`  | Update an issue    | `<id>`    | `--title <title>`, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--parent-id <issueId>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--label-ids <ids...>`, `--added-label-ids <ids...>`, `--removed-label-ids <ids...>`, `--subscriber-ids <ids...>`, `--team-id <teamId>`, `--sort-order <n>`, `--priority-sort-order <n>`, `--snoozed-until-at <datetime>`, `--sub-issue-sort-order <n>` |
+| `issue delete`  | Delete an issue    | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `issue archive` | Archive an issue   | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `issue search`  | Search issues      | `<term>`  | `--first <count>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 **Examples:**
 
@@ -88,13 +88,14 @@ deno task dev issue search "bug" --first 20
 
 ### `comment` — Manage comments
 
-| Subcommand       | Description                | Arguments | Options                                                           |
-| ---------------- | -------------------------- | --------- | ----------------------------------------------------------------- |
-| `comment list`   | List comments              | —         | `--issue-id <issueId>`, `--first <count>`                                                                                         |
-| `comment get`    | Get a comment by ID        | `<id>`    | —                                                                                                                                  |
-| `comment create` | Create a comment           | —         | `--issue-id <issueId>` _(required)_, `--body <body>` _(required)_, `--parent-id <commentId>`, `--project-update-id <id>`, `--document-content-id <id>` |
-| `comment update` | Update a comment           | `<id>`    | `--body <body>`, `--resolved`, `--unresolved`                     |
-| `comment delete` | Delete a comment           | `<id>`    | —                                                                 |
+| Subcommand        | Description         | Arguments | Options                                                                                                                                                |
+| ----------------- | ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `comment list`    | List comments       | —         | `--issue-id <issueId>`, `--first <count>`                                                                                                              |
+| `comment get`     | Get a comment by ID | `<id>`    | —                                                                                                                                                      |
+| `comment create`  | Create a comment    | —         | `--issue-id <issueId>` _(required)_, `--body <body>` _(required)_, `--parent-id <commentId>`, `--project-update-id <id>`, `--document-content-id <id>` |
+| `comment update`  | Update a comment    | `<id>`    | `--body <body>`, `--resolved`, `--unresolved`                                                                                                          |
+| `comment resolve` | Resolve a comment   | `<id>`    | —                                                                                                                                                      |
+| `comment delete`  | Delete a comment    | `<id>`    | —                                                                                                                                                      |
 
 **Examples:**
 
@@ -102,6 +103,7 @@ deno task dev issue search "bug" --first 20
 deno task dev comment list --issue-id <issue-id>
 deno task dev comment create --issue-id <issue-id> --body "My comment"
 deno task dev comment update <comment-id> --body "Updated comment"
+deno task dev comment resolve <comment-id>
 deno task dev comment delete <comment-id>
 ```
 
@@ -109,13 +111,13 @@ deno task dev comment delete <comment-id>
 
 ### `issue-label` — Manage issue labels
 
-| Subcommand           | Description           | Arguments | Options                                                                                               |
-| -------------------- | --------------------- | --------- | ----------------------------------------------------------------------------------------------------- |
-| `issue-label list`   | List issue labels     | —         | `--first <count>`, `--team-id <teamId>`                                                               |
-| `issue-label get`    | Get a label by ID     | `<id>`    | —                                                                                                     |
-| `issue-label create` | Create a label        | —         | `--name <name>` _(required)_, `--team-id <teamId>`, `--color <color>`, `--description <desc>`, `--parent-id <id>`, `--is-group` |
-| `issue-label update` | Update a label        | `<id>`    | `--name <name>`, `--color <color>`, `--description <desc>`, `--parent-id <id>`, `--is-group`                                    |
-| `issue-label delete` | Delete a label        | `<id>`    | —                                                                                                     |
+| Subcommand           | Description       | Arguments | Options                                                                                                                         |
+| -------------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `issue-label list`   | List issue labels | —         | `--first <count>`, `--team-id <teamId>`                                                                                         |
+| `issue-label get`    | Get a label by ID | `<id>`    | —                                                                                                                               |
+| `issue-label create` | Create a label    | —         | `--name <name>` _(required)_, `--team-id <teamId>`, `--color <color>`, `--description <desc>`, `--parent-id <id>`, `--is-group` |
+| `issue-label update` | Update a label    | `<id>`    | `--name <name>`, `--color <color>`, `--description <desc>`, `--parent-id <id>`, `--is-group`                                    |
+| `issue-label delete` | Delete a label    | `<id>`    | —                                                                                                                               |
 
 **Examples:**
 
@@ -130,15 +132,15 @@ deno task dev issue-label delete <label-id>
 
 ### `project` — Manage projects
 
-| Subcommand        | Description          | Arguments | Options                                                                                                                                                          |
-| ----------------- | -------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `project list`    | List projects        | —         | `--first <count>`, `--team <teamId>`, `--state <state>`, `--lead <leadId>`                                                                                        |
-| `project get`     | Get a project by ID  | `<id>`    | —                                                                                                                                                                |
-| `project create`  | Create a project     | —         | `--name <name>` _(required)_, `--team-ids <ids...>` _(required)_, `--description <desc>`, `--state <state>`, `--lead-id <id>`, `--start-date <date>`, `--target-date <date>`, `--color <color>`, `--icon <icon>`, `--member-ids <ids...>`, `--priority <0-4>`, `--status-id <id>`, `--content <markdown>`, `--sort-order <n>`, `--priority-sort-order <n>` |
-| `project update`  | Update a project     | `<id>`    | `--name <name>`, `--description <desc>`, `--state <state>`, `--lead-id <id>`, `--start-date <date>`, `--target-date <date>`, `--color <color>`, `--icon <icon>`, `--member-ids <ids...>`, `--priority <0-4>`, `--status-id <id>`, `--content <markdown>`, `--team-ids <ids...>`, `--sort-order <n>`, `--priority-sort-order <n>` |
-| `project delete`  | Delete a project     | `<id>`    | —                                                                                                                                                                |
-| `project archive` | Archive a project    | `<id>`    | —                                                                                                                                                                |
-| `project search`  | Search projects      | `<term>`  | `--first <count>`                                                                                                                                                |
+| Subcommand        | Description         | Arguments | Options                                                                                                                                                                                                                                                                                                                                                    |
+| ----------------- | ------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project list`    | List projects       | —         | `--first <count>`, `--team <teamId>`, `--state <state>`, `--lead <leadId>`                                                                                                                                                                                                                                                                                 |
+| `project get`     | Get a project by ID | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                          |
+| `project create`  | Create a project    | —         | `--name <name>` _(required)_, `--team-ids <ids...>` _(required)_, `--description <desc>`, `--state <state>`, `--lead-id <id>`, `--start-date <date>`, `--target-date <date>`, `--color <color>`, `--icon <icon>`, `--member-ids <ids...>`, `--priority <0-4>`, `--status-id <id>`, `--content <markdown>`, `--sort-order <n>`, `--priority-sort-order <n>` |
+| `project update`  | Update a project    | `<id>`    | `--name <name>`, `--description <desc>`, `--state <state>`, `--lead-id <id>`, `--start-date <date>`, `--target-date <date>`, `--color <color>`, `--icon <icon>`, `--member-ids <ids...>`, `--priority <0-4>`, `--status-id <id>`, `--content <markdown>`, `--team-ids <ids...>`, `--sort-order <n>`, `--priority-sort-order <n>`                           |
+| `project delete`  | Delete a project    | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                          |
+| `project archive` | Archive a project   | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                          |
+| `project search`  | Search projects     | `<term>`  | `--first <count>`                                                                                                                                                                                                                                                                                                                                          |
 
 **Examples:**
 
@@ -154,13 +156,13 @@ deno task dev project search "redesign"
 
 ### `cycle` — Manage cycles
 
-| Subcommand      | Description        | Arguments | Options                                                                                                                  |
-| --------------- | ------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `cycle list`    | List cycles        | —         | `--first <count>`, `--team <teamId>`                                                                                      |
-| `cycle get`     | Get a cycle by ID  | `<id>`    | —                                                                                                                        |
-| `cycle create`  | Create a cycle     | —         | `--team-id <teamId>` _(required)_, `--starts-at <date>` _(required)_, `--ends-at <date>` _(required)_, `--name <name>`, `--description <desc>` |
-| `cycle update`  | Update a cycle     | `<id>`    | `--name <name>`, `--description <desc>`, `--starts-at <date>`, `--ends-at <date>`                                         |
-| `cycle archive` | Archive a cycle    | `<id>`    | —                                                                                                                        |
+| Subcommand      | Description       | Arguments | Options                                                                                                                                        |
+| --------------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cycle list`    | List cycles       | —         | `--first <count>`, `--team <teamId>`                                                                                                           |
+| `cycle get`     | Get a cycle by ID | `<id>`    | —                                                                                                                                              |
+| `cycle create`  | Create a cycle    | —         | `--team-id <teamId>` _(required)_, `--starts-at <date>` _(required)_, `--ends-at <date>` _(required)_, `--name <name>`, `--description <desc>` |
+| `cycle update`  | Update a cycle    | `<id>`    | `--name <name>`, `--description <desc>`, `--starts-at <date>`, `--ends-at <date>`                                                              |
+| `cycle archive` | Archive a cycle   | `<id>`    | —                                                                                                                                              |
 
 **Examples:**
 
@@ -174,13 +176,13 @@ deno task dev cycle archive <cycle-id>
 
 ### `workflow-state` — Manage workflow states
 
-| Subcommand               | Description          | Arguments | Options                                                                                                                                       |
-| ------------------------ | -------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `workflow-state list`    | List states          | —         | `--first <count>`, `--team <teamId>`, `--type <type>`                                                                                         |
-| `workflow-state get`     | Get a state by ID    | `<id>`    | —                                                                                                                                             |
-| `workflow-state create`  | Create a state       | —         | `--name <name>` _(required)_, `--team-id <teamId>` _(required)_, `--type <type>` _(required)_, `--color <color>` _(required)_, `--description <desc>`, `--position <n>` |
-| `workflow-state update`  | Update a state       | `<id>`    | `--name <name>`, `--color <color>`, `--description <desc>`, `--position <n>`                                                                   |
-| `workflow-state archive` | Archive a state      | `<id>`    | —                                                                                                                                             |
+| Subcommand               | Description       | Arguments | Options                                                                                                                                                                 |
+| ------------------------ | ----------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `workflow-state list`    | List states       | —         | `--first <count>`, `--team <teamId>`, `--type <type>`                                                                                                                   |
+| `workflow-state get`     | Get a state by ID | `<id>`    | —                                                                                                                                                                       |
+| `workflow-state create`  | Create a state    | —         | `--name <name>` _(required)_, `--team-id <teamId>` _(required)_, `--type <type>` _(required)_, `--color <color>` _(required)_, `--description <desc>`, `--position <n>` |
+| `workflow-state update`  | Update a state    | `<id>`    | `--name <name>`, `--color <color>`, `--description <desc>`, `--position <n>`                                                                                            |
+| `workflow-state archive` | Archive a state   | `<id>`    | —                                                                                                                                                                       |
 
 State types: `backlog`, `unstarted`, `started`, `completed`, `cancelled`
 
@@ -195,14 +197,14 @@ deno task dev workflow-state create --name "In Review" --team-id <team-id> --typ
 
 ### `document` — Manage documents
 
-| Subcommand        | Description          | Arguments | Options                                                                              |
-| ----------------- | -------------------- | --------- | ------------------------------------------------------------------------------------ |
-| `document list`   | List documents       | —         | `--first <count>`, `--project <projectId>`                                            |
-| `document get`    | Get a document by ID | `<id>`    | —                                                                                    |
+| Subcommand        | Description          | Arguments | Options                                                                                                                                                    |
+| ----------------- | -------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `document list`   | List documents       | —         | `--first <count>`, `--project <projectId>`                                                                                                                 |
+| `document get`    | Get a document by ID | `<id>`    | —                                                                                                                                                          |
 | `document create` | Create a document    | —         | `--title <title>` _(required)_, `--content <content>`, `--project-id <id>`, `--icon <icon>`, `--color <color>`, `--issue-id <issueId>`, `--sort-order <n>` |
 | `document update` | Update a document    | `<id>`    | `--title <title>`, `--content <content>`, `--project-id <id>`, `--icon <icon>`, `--color <color>`, `--issue-id <issueId>`, `--sort-order <n>`              |
-| `document delete` | Delete a document    | `<id>`    | —                                                                                    |
-| `document search` | Search documents     | `<term>`  | `--first <count>`                                                                    |
+| `document delete` | Delete a document    | `<id>`    | —                                                                                                                                                          |
+| `document search` | Search documents     | `<term>`  | `--first <count>`                                                                                                                                          |
 
 **Examples:**
 
@@ -216,14 +218,14 @@ deno task dev document search "architecture"
 
 ### `initiative` — Manage initiatives
 
-| Subcommand           | Description            | Arguments | Options                                                                          |
-| -------------------- | ---------------------- | --------- | -------------------------------------------------------------------------------- |
-| `initiative list`    | List initiatives       | —         | `--first <count>`                                                                |
-| `initiative get`     | Get an initiative      | `<id>`    | —                                                                                |
-| `initiative create`  | Create an initiative   | —         | `--name <name>` _(required)_, `--description <desc>`, `--color <color>`, `--icon <icon>`, `--owner-id <userId>`, `--status <status>`, `--target-date <YYYY-MM-DD>`, `--content <markdown>`, `--sort-order <n>` |
-| `initiative update`  | Update an initiative   | `<id>`    | `--name <name>`, `--description <desc>`, `--status <status>`, `--color <color>`, `--icon <icon>`, `--owner-id <userId>`, `--target-date <YYYY-MM-DD>`, `--content <markdown>`, `--sort-order <n>` |
-| `initiative delete`  | Delete an initiative   | `<id>`    | —                                                                                |
-| `initiative archive` | Archive an initiative  | `<id>`    | —                                                                                |
+| Subcommand           | Description           | Arguments | Options                                                                                                                                                                                                        |
+| -------------------- | --------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `initiative list`    | List initiatives      | —         | `--first <count>`                                                                                                                                                                                              |
+| `initiative get`     | Get an initiative     | `<id>`    | —                                                                                                                                                                                                              |
+| `initiative create`  | Create an initiative  | —         | `--name <name>` _(required)_, `--description <desc>`, `--color <color>`, `--icon <icon>`, `--owner-id <userId>`, `--status <status>`, `--target-date <YYYY-MM-DD>`, `--content <markdown>`, `--sort-order <n>` |
+| `initiative update`  | Update an initiative  | `<id>`    | `--name <name>`, `--description <desc>`, `--status <status>`, `--color <color>`, `--icon <icon>`, `--owner-id <userId>`, `--target-date <YYYY-MM-DD>`, `--content <markdown>`, `--sort-order <n>`              |
+| `initiative delete`  | Delete an initiative  | `<id>`    | —                                                                                                                                                                                                              |
+| `initiative archive` | Archive an initiative | `<id>`    | —                                                                                                                                                                                                              |
 
 **Examples:**
 
@@ -236,14 +238,14 @@ deno task dev initiative create --name "Q1 Goals" --color "#3b82f6"
 
 ### `roadmap` — Manage roadmaps
 
-| Subcommand        | Description         | Arguments | Options                                                          |
-| ----------------- | ------------------- | --------- | ---------------------------------------------------------------- |
-| `roadmap list`    | List roadmaps       | —         | `--first <count>`                                                |
-| `roadmap get`     | Get a roadmap       | `<id>`    | —                                                                |
-| `roadmap create`  | Create a roadmap    | —         | `--name <name>` _(required)_, `--description <desc>`, `--color <color>`, `--owner-id <userId>`, `--sort-order <n>` |
-| `roadmap update`  | Update a roadmap    | `<id>`    | `--name <name>`, `--description <desc>`, `--color <color>`, `--owner-id <userId>`, `--sort-order <n>`               |
-| `roadmap delete`  | Delete a roadmap    | `<id>`    | —                                                                |
-| `roadmap archive` | Archive a roadmap   | `<id>`    | —                                                                |
+| Subcommand        | Description       | Arguments | Options                                                                                                            |
+| ----------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
+| `roadmap list`    | List roadmaps     | —         | `--first <count>`                                                                                                  |
+| `roadmap get`     | Get a roadmap     | `<id>`    | —                                                                                                                  |
+| `roadmap create`  | Create a roadmap  | —         | `--name <name>` _(required)_, `--description <desc>`, `--color <color>`, `--owner-id <userId>`, `--sort-order <n>` |
+| `roadmap update`  | Update a roadmap  | `<id>`    | `--name <name>`, `--description <desc>`, `--color <color>`, `--owner-id <userId>`, `--sort-order <n>`              |
+| `roadmap delete`  | Delete a roadmap  | `<id>`    | —                                                                                                                  |
+| `roadmap archive` | Archive a roadmap | `<id>`    | —                                                                                                                  |
 
 **Examples:**
 
@@ -256,13 +258,13 @@ deno task dev roadmap create --name "2025 Roadmap"
 
 ### `project-milestone` — Manage project milestones
 
-| Subcommand                  | Description           | Arguments | Options                                                                                                         |
-| --------------------------- | --------------------- | --------- | --------------------------------------------------------------------------------------------------------------- |
-| `project-milestone list`    | List milestones       | —         | `--first <count>`, `--project <projectId>`                                                                       |
-| `project-milestone get`     | Get a milestone       | `<id>`    | —                                                                                                               |
-| `project-milestone create`  | Create a milestone    | —         | `--name <name>` _(required)_, `--project-id <id>` _(required)_, `--description <desc>`, `--target-date <date>`, `--sort-order <n>` |
-| `project-milestone update`  | Update a milestone    | `<id>`    | `--name <name>`, `--description <desc>`, `--target-date <date>`, `--sort-order <n>`, `--project-id <id>`            |
-| `project-milestone delete`  | Delete a milestone    | `<id>`    | —                                                                                                               |
+| Subcommand                 | Description        | Arguments | Options                                                                                                                            |
+| -------------------------- | ------------------ | --------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `project-milestone list`   | List milestones    | —         | `--first <count>`, `--project <projectId>`                                                                                         |
+| `project-milestone get`    | Get a milestone    | `<id>`    | —                                                                                                                                  |
+| `project-milestone create` | Create a milestone | —         | `--name <name>` _(required)_, `--project-id <id>` _(required)_, `--description <desc>`, `--target-date <date>`, `--sort-order <n>` |
+| `project-milestone update` | Update a milestone | `<id>`    | `--name <name>`, `--description <desc>`, `--target-date <date>`, `--sort-order <n>`, `--project-id <id>`                           |
+| `project-milestone delete` | Delete a milestone | `<id>`    | —                                                                                                                                  |
 
 **Examples:**
 
@@ -275,13 +277,13 @@ deno task dev project-milestone create --name "Beta" --project-id <project-id> -
 
 ### `project-update` — Manage project updates
 
-| Subcommand              | Description              | Arguments | Options                                                                               |
-| ----------------------- | ------------------------ | --------- | ------------------------------------------------------------------------------------- |
-| `project-update list`   | List project updates     | —         | `--first <count>`, `--project <projectId>`                                             |
-| `project-update get`    | Get a project update     | `<id>`    | —                                                                                     |
-| `project-update create` | Create a project update  | —         | `--project-id <id>` _(required)_, `--body <body>` _(required)_, `--health <health>`    |
-| `project-update update` | Update a project update  | `<id>`    | `--body <body>`, `--health <health>`, `--is-diff-hidden`                                |
-| `project-update delete` | Delete a project update  | `<id>`    | —                                                                                     |
+| Subcommand              | Description             | Arguments | Options                                                                             |
+| ----------------------- | ----------------------- | --------- | ----------------------------------------------------------------------------------- |
+| `project-update list`   | List project updates    | —         | `--first <count>`, `--project <projectId>`                                          |
+| `project-update get`    | Get a project update    | `<id>`    | —                                                                                   |
+| `project-update create` | Create a project update | —         | `--project-id <id>` _(required)_, `--body <body>` _(required)_, `--health <health>` |
+| `project-update update` | Update a project update | `<id>`    | `--body <body>`, `--health <health>`, `--is-diff-hidden`                            |
+| `project-update delete` | Delete a project update | `<id>`    | —                                                                                   |
 
 Health values: `onTrack`, `atRisk`, `offTrack`
 
@@ -296,13 +298,13 @@ deno task dev project-update create --project-id <project-id> --body "Sprint wen
 
 ### `issue-relation` — Manage issue relations
 
-| Subcommand              | Description           | Arguments | Options                                                                                                  |
-| ----------------------- | --------------------- | --------- | -------------------------------------------------------------------------------------------------------- |
-| `issue-relation list`   | List relations        | —         | `--first <count>`                                                                                        |
-| `issue-relation get`    | Get a relation        | `<id>`    | —                                                                                                        |
-| `issue-relation create` | Create a relation     | —         | `--issue-id <id>` _(required)_, `--related-issue-id <id>` _(required)_, `--type <type>` _(required)_      |
-| `issue-relation update` | Update a relation     | `<id>`    | `--type <type>`, `--issue-id <issueId>`, `--related-issue-id <issueId>`                                    |
-| `issue-relation delete` | Delete a relation     | `<id>`    | —                                                                                                        |
+| Subcommand              | Description       | Arguments | Options                                                                                              |
+| ----------------------- | ----------------- | --------- | ---------------------------------------------------------------------------------------------------- |
+| `issue-relation list`   | List relations    | —         | `--first <count>`                                                                                    |
+| `issue-relation get`    | Get a relation    | `<id>`    | —                                                                                                    |
+| `issue-relation create` | Create a relation | —         | `--issue-id <id>` _(required)_, `--related-issue-id <id>` _(required)_, `--type <type>` _(required)_ |
+| `issue-relation update` | Update a relation | `<id>`    | `--type <type>`, `--issue-id <issueId>`, `--related-issue-id <issueId>`                              |
+| `issue-relation delete` | Delete a relation | `<id>`    | —                                                                                                    |
 
 Relation types: `blocks`, `duplicate`, `related`, `similar`
 
@@ -326,12 +328,12 @@ deno task dev issue-relation create --issue-id <issue-a-id> --related-issue-id <
 
 ### `webhook` — Manage webhooks
 
-| Subcommand       | Description        | Arguments | Options                                                                                                            |
-| ---------------- | ------------------ | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| `webhook list`   | List webhooks      | —         | `--first <count>`                                                                                                  |
-| `webhook get`    | Get a webhook      | `<id>`    | —                                                                                                                  |
-| `webhook create` | Create a webhook   | —         | `--url <url>` _(required)_, `--resource-types <types...>` _(required)_, `--label <label>`, `--team-id <id>`, `--all-public-teams`, `--enabled <bool>`, `--secret <secret>` |
-| `webhook update` | Update a webhook   | `<id>`    | `--url <url>`, `--label <label>`, `--enabled <bool>`, `--resource-types <types...>`, `--secret <secret>`             |
+| Subcommand       | Description      | Arguments | Options                                                                                                                                                                    |
+| ---------------- | ---------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `webhook list`   | List webhooks    | —         | `--first <count>`                                                                                                                                                          |
+| `webhook get`    | Get a webhook    | `<id>`    | —                                                                                                                                                                          |
+| `webhook create` | Create a webhook | —         | `--url <url>` _(required)_, `--resource-types <types...>` _(required)_, `--label <label>`, `--team-id <id>`, `--all-public-teams`, `--enabled <bool>`, `--secret <secret>` |
+| `webhook update` | Update a webhook | `<id>`    | `--url <url>`, `--label <label>`, `--enabled <bool>`, `--resource-types <types...>`, `--secret <secret>`                                                                   |
 
 **Examples:**
 
@@ -344,12 +346,12 @@ deno task dev webhook create --url "https://example.com/hook" --resource-types I
 
 ### `notification` — Manage notifications
 
-| Subcommand             | Description            | Arguments | Options                                                     |
-| ---------------------- | ---------------------- | --------- | ----------------------------------------------------------- |
-| `notification list`    | List notifications     | —         | `--first <count>`                                           |
-| `notification get`     | Get a notification     | `<id>`    | —                                                           |
-| `notification update`  | Update a notification  | `<id>`    | `--read-at <date>`, `--snoozed-until-at <date>`             |
-| `notification archive` | Archive a notification | `<id>`    | —                                                           |
+| Subcommand             | Description            | Arguments | Options                                         |
+| ---------------------- | ---------------------- | --------- | ----------------------------------------------- |
+| `notification list`    | List notifications     | —         | `--first <count>`                               |
+| `notification get`     | Get a notification     | `<id>`    | —                                               |
+| `notification update`  | Update a notification  | `<id>`    | `--read-at <date>`, `--snoozed-until-at <date>` |
+| `notification archive` | Archive a notification | `<id>`    | —                                               |
 
 **Examples:**
 
@@ -362,13 +364,13 @@ deno task dev notification archive <notification-id>
 
 ### `attachment` — Manage attachments
 
-| Subcommand          | Description          | Arguments | Options                                                                                         |
-| ------------------- | -------------------- | --------- | ----------------------------------------------------------------------------------------------- |
-| `attachment list`   | List attachments     | —         | `--first <count>`                                                                               |
-| `attachment get`    | Get an attachment    | `<id>`    | —                                                                                               |
+| Subcommand          | Description          | Arguments | Options                                                                                                                                                                               |
+| ------------------- | -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `attachment list`   | List attachments     | —         | `--first <count>`                                                                                                                                                                     |
+| `attachment get`    | Get an attachment    | `<id>`    | —                                                                                                                                                                                     |
 | `attachment create` | Create an attachment | —         | `--issue-id <id>` _(required)_, `--url <url>` _(required)_, `--title <title>` _(required)_, `--subtitle <subtitle>`, `--comment-body <body>`, `--icon-url <url>`, `--group-by-source` |
-| `attachment update` | Update an attachment | `<id>`    | `--title <title>`, `--subtitle <subtitle>`, `--url <url>`, `--icon-url <url>`                     |
-| `attachment delete` | Delete an attachment | `<id>`    | —                                                                                               |
+| `attachment update` | Update an attachment | `<id>`    | `--title <title>`, `--subtitle <subtitle>`, `--url <url>`, `--icon-url <url>`                                                                                                         |
+| `attachment delete` | Delete an attachment | `<id>`    | —                                                                                                                                                                                     |
 
 **Examples:**
 
@@ -485,7 +487,7 @@ linear-cli/
         ├── team/                   # list, get
         ├── user/                   # get, list
         ├── issue/                  # list, get, create, update, delete, archive, search
-        ├── comment/                # list, get, create, update, delete
+        ├── comment/                # list, get, create, update, resolve, delete
         ├── issue-label/            # list, get, create, update, delete
         ├── project/                # list, get, create, update, delete, archive, search
         ├── cycle/                  # list, get, create, update, archive
