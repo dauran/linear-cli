@@ -41,14 +41,18 @@ export const getCommand = new Command()
         team: team ? pick(team, ["id", "name", "key"]) : null,
         parent: parent
           ? {
-              ...pick(parent, CHILD_FIELDS),
-              state: (await parent.state?.then((s) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
-            }
+            ...pick(parent, CHILD_FIELDS),
+            state: (await parent.state?.then((
+              s,
+            ) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
+          }
           : null,
         children: await Promise.all(
           childrenConn.nodes.map(async (c) => ({
             ...pick(c, CHILD_FIELDS),
-            state: (await c.state?.then((s) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
+            state: (await c.state?.then((
+              s,
+            ) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
           })),
         ),
         relations: await Promise.all(
@@ -58,9 +62,11 @@ export const getCommand = new Command()
               ...pick(r, RELATION_FIELDS),
               relatedIssue: related
                 ? {
-                    ...pick(related, CHILD_FIELDS),
-                    state: (await related.state?.then((s) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
-                  }
+                  ...pick(related, CHILD_FIELDS),
+                  state: (await related.state?.then((
+                    s,
+                  ) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
+                }
                 : null,
             };
           }),
@@ -72,9 +78,11 @@ export const getCommand = new Command()
               ...pick(r, RELATION_FIELDS),
               issue: src
                 ? {
-                    ...pick(src, CHILD_FIELDS),
-                    state: (await src.state?.then((s) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
-                  }
+                  ...pick(src, CHILD_FIELDS),
+                  state: (await src.state?.then((
+                    s,
+                  ) => (s ? pick(s, STATE_FIELDS) : null))) ?? null,
+                }
                 : null,
             };
           }),

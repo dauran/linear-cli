@@ -16,9 +16,13 @@ export const createCommand = new Command()
   .description("Create a new workflow state.")
   .option("--name <name:string>", "State name.", { required: true })
   .option("--team-id <teamId:string>", "Team ID.", { required: true })
-  .option("--type <type:string>", "State type (backlog, unstarted, started, completed, cancelled).", {
-    required: true,
-  })
+  .option(
+    "--type <type:string>",
+    "State type (backlog, unstarted, started, completed, cancelled).",
+    {
+      required: true,
+    },
+  )
   .option("--color <color:string>", "State color.", { required: true })
   .option("--description <description:string>", "State description.")
   .option("--position <position:number>", "State position.")

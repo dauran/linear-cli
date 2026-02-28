@@ -17,9 +17,7 @@ export const getCommand = new Command()
 
       const data = {
         ...pick(relation, RELATION_FIELDS),
-        issue: issue
-          ? pick(issue, ["id", "identifier", "title"])
-          : null,
+        issue: issue ? pick(issue, ["id", "identifier", "title"]) : null,
         relatedIssue: relatedIssue
           ? pick(relatedIssue, ["id", "identifier", "title"])
           : null,

@@ -1,6 +1,8 @@
 # Linear CLI
 
-A command-line interface to interact with the [Linear](https://linear.app) API from your terminal. Manage issues, projects, cycles, documents, and more without leaving the shell.
+A command-line interface to interact with the [Linear](https://linear.app) API
+from your terminal. Manage issues, projects, cycles, documents, and more without
+leaving the shell.
 
 Built with [Deno](https://deno.land) and [Cliffy](https://cliffy.io).
 
@@ -383,9 +385,12 @@ deno task dev attachment create --issue-id <issue-id> --url "https://example.com
 
 ## Shell scripts
 
-The `scripts/` directory contains convenience scripts that wrap common workflows. These files are **gitignored** to protect API keys.
+The `scripts/` directory contains convenience scripts that wrap common
+workflows. These files are **gitignored** to protect API keys.
 
-> **Prerequisites:** source a workspace wrapper first (`linear-work.sh` or `linear-perso.sh`) or have `LINEAR_API_KEY` set, and have the compiled `linear` binary in the current directory.
+> **Prerequisites:** source a workspace wrapper first (`linear-work.sh` or
+> `linear-perso.sh`) or have `LINEAR_API_KEY` set, and have the compiled
+> `linear` binary in the current directory.
 
 ### `scripts/comments.sh` — List comments on a ticket
 
@@ -394,7 +399,8 @@ The `scripts/` directory contains convenience scripts that wrap common workflows
 # ex: ./scripts/comments.sh DAU-42
 ```
 
-outputs a hierarchical Markdown view of all comments (author, ID, content, resolved status).
+outputs a hierarchical Markdown view of all comments (author, ID, content,
+resolved status).
 
 ### `scripts/write-comment.sh` — Add a comment to a ticket
 
@@ -420,7 +426,8 @@ source scripts/linear-work.sh   # set API key
 # ex: ./scripts/project.sh DAU-42
 ```
 
-Outputs user info, team info, available workflow states, and the full ticket details.
+Outputs user info, team info, available workflow states, and the full ticket
+details.
 
 ### `scripts/block.sh` — Manage blocking relations between tickets
 
@@ -442,11 +449,14 @@ Outputs user info, team info, available workflow states, and the full ticket det
 # ex: ./scripts/block.sh DAU-42 --unblocked-by DAU-10
 ```
 
-The forms `--blocks`/`--blocked-by` and `--unblocks`/`--unblocked-by` are symmetrical — they designate the same relation, formulated from the point of view of each ticket.
+The forms `--blocks`/`--blocked-by` and `--unblocks`/`--unblocked-by` are
+symmetrical — they designate the same relation, formulated from the point of
+view of each ticket.
 
 ## Building an executable
 
-Deno can compile the project into a **standalone native binary** — no dependencies required on the target machine.
+Deno can compile the project into a **standalone native binary** — no
+dependencies required on the target machine.
 
 ### Compile for your platform
 
@@ -503,7 +513,8 @@ linear issue list
 
 ## Multiple workspaces
 
-To use multiple Linear workspaces with different API keys, create wrapper scripts in the `scripts/` directory:
+To use multiple Linear workspaces with different API keys, create wrapper
+scripts in the `scripts/` directory:
 
 **`scripts/linear-work.sh`**
 

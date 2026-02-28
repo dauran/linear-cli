@@ -1,7 +1,4 @@
-import {
-  InvalidInputLinearError,
-  LinearError,
-} from "@linear/sdk";
+import { InvalidInputLinearError, LinearError } from "@linear/sdk";
 
 export function handleErrors<T extends unknown[]>(
   fn: (...args: T) => Promise<void>,

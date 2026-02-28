@@ -35,7 +35,10 @@ export const listCommand = new Command()
   .option("--project <projectId:string>", "Filter by project ID.")
   .option("--label <labelId:string>", "Filter by label ID.")
   .option("--priority <priority:number>", "Filter by priority (0-4).")
-  .option("--parent <issueId:string>", "Filter by parent issue ID (sub-issues).")
+  .option(
+    "--parent <issueId:string>",
+    "Filter by parent issue ID (sub-issues).",
+  )
   .action(
     handleErrors(async (options: ListOptions) => {
       const client = getClient();

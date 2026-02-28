@@ -23,9 +23,7 @@ export const getCommand = new Command()
 
       const data = {
         ...pick(attachment, ATTACHMENT_FIELDS),
-        issue: issue
-          ? pick(issue, ["id", "identifier", "title"])
-          : null,
+        issue: issue ? pick(issue, ["id", "identifier", "title"]) : null,
       };
 
       printJson(data);

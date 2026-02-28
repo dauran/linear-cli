@@ -8,7 +8,14 @@ interface ListOptions {
   first?: number;
 }
 
-const COMMENT_FIELDS = ["id", "parentId", "body", "createdAt", "updatedAt", "resolvedAt"];
+const COMMENT_FIELDS = [
+  "id",
+  "parentId",
+  "body",
+  "createdAt",
+  "updatedAt",
+  "resolvedAt",
+];
 
 export const listCommand = new Command()
   .description("List comments for an issue.")
