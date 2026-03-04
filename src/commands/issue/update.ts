@@ -1,6 +1,6 @@
 import { Command } from "@cliffy/command";
 import { getClient } from "../../client.ts";
-import { pick, printJson } from "../../output.ts";
+import { printJson } from "../../output.ts";
 import { handleErrors } from "../../errors.ts";
 
 interface UpdateOptions {
@@ -44,10 +44,7 @@ export const updateCommand = new Command()
     "Project milestone ID.",
   )
   .option("--label-ids <labelIds...:string>", "Replace all label IDs.")
-  .option(
-    "--added-label-ids <addedLabelIds...:string>",
-    "Label IDs to add.",
-  )
+  .option("--added-label-ids <addedLabelIds...:string>", "Label IDs to add.")
   .option(
     "--removed-label-ids <removedLabelIds...:string>",
     "Label IDs to remove.",
@@ -132,14 +129,7 @@ export const updateCommand = new Command()
       const issue = await payload.issue;
 
       if (issue) {
-        printJson(
-          pick(issue, [
-            "id",
-            "identifier",
-            "title",
-            "url",
-          ]),
-        );
+        printJson(issue);
       }
     }),
   );
