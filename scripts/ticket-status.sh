@@ -73,8 +73,7 @@ echo "🔄 Changing to status : \`$STATUS_ID\`..."
 # ── Status update ─────────────────────────────────────────────────────
 RESULT="$(run issue update "$ISSUE_ID" --state-id "$STATUS_ID")"
 
-NEW_STATE="$(echo "$RESULT" | jq -r '.state.name // empty')"
-NEW_STATE_ID="$(echo "$RESULT" | jq -r '.state.id // empty')"
+NEW_STATE_ID="$(echo "$RESULT" | jq -r '._state.id // empty')"
 ISSUE_URL="$(echo "$RESULT" | jq -r '.url // empty')"
 
 if [[ -n "$NEW_STATE_ID" ]]; then
@@ -82,7 +81,7 @@ if [[ -n "$NEW_STATE_ID" ]]; then
   echo "✅ Status successfully updated!"
   echo ""
   echo "  🎫 Ticket  : [$TICKET] $ISSUE_TITLE"
-  echo "  📊 New status : $NEW_STATE (\`$NEW_STATE_ID\`)"
+  echo "  📊 New status : \`$NEW_STATE_ID\`"
   [[ -n "$ISSUE_URL" ]] && echo "  🔗 URL     : $ISSUE_URL"
 else
   die "Failed to update the status. Response: $RESULT"
