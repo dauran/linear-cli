@@ -63,15 +63,16 @@ deno task dev user list --first 20
 
 ### `issue` — Manage issues
 
-| Subcommand      | Description        | Arguments | Options                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------------- | ------------------ | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `issue list`    | List issues        | —         | `--first <count>`, `--team <teamId>`, `--assignee <userId>`, `--state <stateId>`, `--cycle <cycleId>`, `--project <projectId>`, `--label <labelId>`, `--priority <0-4>`, `--parent <issueId>`                                                                                                                                                                                                                                                                                                                                     |
-| `issue get`     | Get an issue by ID | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `issue create`  | Create a new issue | —         | `--title <title>` _(required)_, `--team-id <teamId>` _(required)_, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--label-ids <ids...>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--parent-id <issueId>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--subscriber-ids <ids...>`, `--sort-order <n>`, `--priority-sort-order <n>`                                                                                                    |
-| `issue update`  | Update an issue    | `<id>`    | `--title <title>`, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--parent-id <issueId>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--label-ids <ids...>`, `--added-label-ids <ids...>`, `--removed-label-ids <ids...>`, `--subscriber-ids <ids...>`, `--team-id <teamId>`, `--sort-order <n>`, `--priority-sort-order <n>`, `--snoozed-until-at <datetime>`, `--sub-issue-sort-order <n>` |
-| `issue delete`  | Delete an issue    | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `issue archive` | Archive an issue   | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `issue search`  | Search issues      | `<term>`  | `--first <count>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Subcommand       | Description                                                             | Arguments | Options                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------------- | ----------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `issue list`     | List issues                                                             | —         | `--first <count>`, `--team <teamId>`, `--assignee <userId>`, `--state <stateId>`, `--cycle <cycleId>`, `--project <projectId>`, `--label <labelId>`, `--priority <0-4>`, `--parent <issueId>`                                                                                                                                                                                                                                                                                                                                     |
+| `issue get`      | Get an issue by ID                                                      | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `issue create`   | Create a new issue                                                      | —         | `--title <title>` _(required)_, `--team-id <teamId>` _(required)_, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--label-ids <ids...>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--parent-id <issueId>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--subscriber-ids <ids...>`, `--sort-order <n>`, `--priority-sort-order <n>`                                                                                                    |
+| `issue update`   | Update an issue                                                         | `<id>`    | `--title <title>`, `--description <desc>`, `--priority <0-4>`, `--assignee-id <userId>`, `--state-id <stateId>`, `--parent-id <issueId>`, `--cycle-id <cycleId>`, `--due-date <YYYY-MM-DD>`, `--estimate <n>`, `--project-id <projectId>`, `--project-milestone-id <id>`, `--label-ids <ids...>`, `--added-label-ids <ids...>`, `--removed-label-ids <ids...>`, `--subscriber-ids <ids...>`, `--team-id <teamId>`, `--sort-order <n>`, `--priority-sort-order <n>`, `--snoozed-until-at <datetime>`, `--sub-issue-sort-order <n>` |
+| `issue delete`   | Delete an issue                                                         | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `issue download` | Download inline uploaded files from an issue's description and comments | `<id>`    | `--output <dir>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `issue archive`  | Archive an issue                                                        | `<id>`    | —                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `issue search`   | Search issues                                                           | `<term>`  | `--first <count>`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 **Examples:**
 
@@ -82,6 +83,8 @@ deno task dev issue update <issue-id> --title "New title" --state-id <state-id>
 # Make an issue a sub-issue of another
 deno task dev issue update <issue-id> --parent-id <parent-issue-id>
 deno task dev issue delete <issue-id>
+deno task dev issue download <issue-id>
+deno task dev issue download <issue-id> --output ./tmp/files
 deno task dev issue archive <issue-id>
 deno task dev issue search "bug" --first 20
 ```
@@ -461,25 +464,26 @@ dependencies required on the target machine.
 ### Compile for your platform
 
 ```bash
-deno compile --allow-env --allow-net --output linear main.ts
+deno compile --allow-env --allow-net --allow-read --allow-write --output linear main.ts
 ```
 
-This produces a `linear` executable in the current directory.
+This produces a `linear` executable in the current directory. `--allow-read` and
+`--allow-write` are required by `issue download` (file output).
 
 ### Cross-compilation
 
 ```bash
 # macOS Apple Silicon (M1/M2/M3)
-deno compile --allow-env --allow-net --target aarch64-apple-darwin --output linear-macos-arm64 main.ts
+deno compile --allow-env --allow-net --allow-read --allow-write --target aarch64-apple-darwin --output linear-macos-arm64 main.ts
 
 # macOS Intel
-deno compile --allow-env --allow-net --target x86_64-apple-darwin --output linear-macos-x64 main.ts
+deno compile --allow-env --allow-net --allow-read --allow-write --target x86_64-apple-darwin --output linear-macos-x64 main.ts
 
 # Linux x64
-deno compile --allow-env --allow-net --target x86_64-unknown-linux-gnu --output linear-linux main.ts
+deno compile --allow-env --allow-net --allow-read --allow-write --target x86_64-unknown-linux-gnu --output linear-linux main.ts
 
 # Windows x64
-deno compile --allow-env --allow-net --target x86_64-pc-windows-msvc --output linear-windows.exe main.ts
+deno compile --allow-env --allow-net --allow-read --allow-write --target x86_64-pc-windows-msvc --output linear-windows.exe main.ts
 ```
 
 ### Running the executable

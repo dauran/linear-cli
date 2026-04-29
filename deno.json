@@ -4,10 +4,10 @@
     "@linear/sdk": "npm:@linear/sdk@82.1.0"
   },
   "tasks": {
-    "dev": "deno run --allow-env --allow-net main.ts",
+    "dev": "deno run --allow-env --allow-net --allow-read --allow-write main.ts",
     "check": "deno check main.ts",
     "lint": "deno lint",
     "fmt": "deno fmt",
-    "mac": "deno compile --allow-env --allow-net --target aarch64-apple-darwin --output linear main.ts"
+    "mac": "deno compile --allow-env --allow-net --allow-read --allow-write --target aarch64-apple-darwin --output linear main.ts"
   }
 }
